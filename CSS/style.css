@@ -1,0 +1,431 @@
+:root {
+    --bg-color: #f4f7fe;
+    --primary-color: #6a5af9;
+    --secondary-color: #fca311;
+    --text-color: #333;
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    --border-radius: 12px;
+    --font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 800px;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.app-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* --- Statistik --- */
+.stats-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-card {
+    background: #fff;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+}
+
+.stat-icon {
+    font-size: 1.5rem;
+    padding: 0.8rem;
+    border-radius: 25%;
+    display: flex;
+    color: #fff;
+}
+.stat-icon.total { background: #5a78f9; }
+.stat-icon.completed { background: #34d399; }
+.stat-icon.pending { background: #f59e0b; }
+
+.stat-info p {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0;
+}
+.stat-info h2 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+/* --- Progress Bar --- */
+.progress-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+.progress-bar-container {
+    flex-grow: 1;
+    height: 10px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #6a5af9, #a855f7);
+    border-radius: 5px;
+    transition: width 0.5s ease-in-out;
+}
+#progress-text {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* --- Form Tambah --- */
+.add-task-form {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.add-task-form input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: var(--border-radius);
+    border: 1px solid #ddd;
+    font-family: var(--font-family);
+    transition: box-shadow 0.3s;
+}
+.add-task-form input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(106, 90, 249, 0.3);
+}
+
+.add-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.add-btn:hover {
+    background: #5345d7;
+    transform: scale(1.05);
+}
+
+/* --- Kontrol & Daftar Tugas --- */
+.task-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.search-wrapper {
+    position: relative;
+    color: #999;
+}
+.search-wrapper i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#search-input {
+    padding: 0.5rem 0.5rem 0.5rem 2rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+}
+.delete-all-btn {
+    padding: 0.5rem 1rem;
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.delete-all-btn:hover {
+    background: #dc2626;
+}
+
+.task-list-container {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: #fff;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: #999;
+}
+.task-item.completed {
+    opacity: 0.7;
+    background: #f1f5f9;
+}
+
+.task-checkbox {
+    width: 20px;
+    height: 20px;
+    margin-right: 1rem;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.task-content {
+    flex-grow: 1;
+}
+
+.task-text {
+    margin: 0;
+    font-weight: 500;
+}
+
+.due-date {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.task-actions button {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    transition: color 0.3s;
+}
+.task-actions .delete-btn:hover {
+    color: #ef4444;
+}
+
+.empty-message {
+    text-align: center;
+    padding: 2rem;
+    color: #999;
+}
+.empty-message i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* === KONTROL, MODAL & TOAST === */
+
+.task-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.filter-buttons {
+    display: flex;
+    background-color: #eef2ff;
+    border-radius: var(--border-radius);
+    padding: 0.3rem;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: transparent;
+    color: #666;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 9px;
+    transition: all 0.3s ease;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(106, 90, 249, 0.3);
+}
+
+.sort-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.sort-wrapper i {
+    position: absolute;
+    left: 10px;
+    color: #999;
+}
+
+.sort-select {
+    padding: 0.5rem 0.8rem 0.5rem 2.2rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    background-color: white;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+#search-input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: var(--border-radius);
+    border: 1px solid #ddd;
+}
+.delete-all-btn {
+    white-space: nowrap;
+}
+
+
+/* Styling Modal Konfirmasi */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.show .modal-content {
+    transform: scale(1);
+}
+
+.modal-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.modal-btn {
+    padding: 0.6rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.modal-btn:hover {
+    transform: scale(1.05);
+}
+.modal-btn.cancel {
+    background: #e5e7eb;
+    color: #333;
+}
+.modal-btn.confirm {
+    background: #ef4444;
+    color: white;
+}
+
+/* Styling Toast Notifikasi */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #34d399;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateX(120%);
+    transition: transform 0.5s ease-in-out;
+    z-index: 1001;
+}
+
+.toast.show {
+    transform: translateX(0);
+}
